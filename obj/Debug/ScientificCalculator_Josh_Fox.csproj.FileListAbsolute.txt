@@ -1,0 +1,10 @@
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\bin\Debug\ScientificCalculator_Josh_Fox.exe.config
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\bin\Debug\ScientificCalculator_Josh_Fox.exe
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\bin\Debug\ScientificCalculator_Josh_Fox.pdb
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\obj\Debug\ScientificCalculator_Josh_Fox.csprojAssemblyReference.cache
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\obj\Debug\ScientificCalculator_Josh_Fox.Form1.resources
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\obj\Debug\ScientificCalculator_Josh_Fox.Properties.Resources.resources
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\obj\Debug\ScientificCalculator_Josh_Fox.csproj.GenerateResource.cache
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\obj\Debug\ScientificCalculator_Josh_Fox.csproj.CoreCompileInputs.cache
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\obj\Debug\ScientificCalculator_Josh_Fox.exe
+C:\Users\willi\source\repos\ScientificCalculator_Josh_Fox\ScientificCalculator_Josh_Fox\obj\Debug\ScientificCalculator_Josh_Fox.pdb
