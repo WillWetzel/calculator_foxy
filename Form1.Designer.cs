@@ -52,11 +52,16 @@
             this.btn_tan = new System.Windows.Forms.Button();
             this.radioButtonDegrees = new System.Windows.Forms.RadioButton();
             this.radioButtonRadians = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnPowerThree = new System.Windows.Forms.Button();
+            this.btnPowerTwo = new System.Windows.Forms.Button();
+            this.btnPowerY = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_1
             // 
-            this.btn_1.Location = new System.Drawing.Point(464, 163);
+            this.btn_1.Location = new System.Drawing.Point(485, 163);
             this.btn_1.Name = "btn_1";
             this.btn_1.Size = new System.Drawing.Size(50, 38);
             this.btn_1.TabIndex = 0;
@@ -66,7 +71,7 @@
             // 
             // btn_2
             // 
-            this.btn_2.Location = new System.Drawing.Point(529, 163);
+            this.btn_2.Location = new System.Drawing.Point(541, 163);
             this.btn_2.Name = "btn_2";
             this.btn_2.Size = new System.Drawing.Size(50, 38);
             this.btn_2.TabIndex = 1;
@@ -86,7 +91,7 @@
             // 
             // btn_4
             // 
-            this.btn_4.Location = new System.Drawing.Point(464, 207);
+            this.btn_4.Location = new System.Drawing.Point(485, 207);
             this.btn_4.Name = "btn_4";
             this.btn_4.Size = new System.Drawing.Size(50, 38);
             this.btn_4.TabIndex = 3;
@@ -96,7 +101,7 @@
             // 
             // btn_5
             // 
-            this.btn_5.Location = new System.Drawing.Point(529, 207);
+            this.btn_5.Location = new System.Drawing.Point(541, 207);
             this.btn_5.Name = "btn_5";
             this.btn_5.Size = new System.Drawing.Size(50, 38);
             this.btn_5.TabIndex = 5;
@@ -116,7 +121,7 @@
             // 
             // btn_7
             // 
-            this.btn_7.Location = new System.Drawing.Point(464, 251);
+            this.btn_7.Location = new System.Drawing.Point(485, 251);
             this.btn_7.Name = "btn_7";
             this.btn_7.Size = new System.Drawing.Size(50, 38);
             this.btn_7.TabIndex = 6;
@@ -126,7 +131,7 @@
             // 
             // btn_8
             // 
-            this.btn_8.Location = new System.Drawing.Point(529, 251);
+            this.btn_8.Location = new System.Drawing.Point(541, 251);
             this.btn_8.Name = "btn_8";
             this.btn_8.Size = new System.Drawing.Size(50, 38);
             this.btn_8.TabIndex = 7;
@@ -187,9 +192,9 @@
             // 
             // btn_0
             // 
-            this.btn_0.Location = new System.Drawing.Point(464, 295);
+            this.btn_0.Location = new System.Drawing.Point(485, 295);
             this.btn_0.Name = "btn_0";
-            this.btn_0.Size = new System.Drawing.Size(115, 38);
+            this.btn_0.Size = new System.Drawing.Size(106, 38);
             this.btn_0.TabIndex = 13;
             this.btn_0.Text = "0";
             this.btn_0.UseVisualStyleBackColor = true;
@@ -235,7 +240,7 @@
             // 
             // btn_sin
             // 
-            this.btn_sin.Location = new System.Drawing.Point(352, 163);
+            this.btn_sin.Location = new System.Drawing.Point(317, 163);
             this.btn_sin.Name = "btn_sin";
             this.btn_sin.Size = new System.Drawing.Size(50, 38);
             this.btn_sin.TabIndex = 18;
@@ -245,7 +250,7 @@
             // 
             // btn_cos
             // 
-            this.btn_cos.Location = new System.Drawing.Point(352, 207);
+            this.btn_cos.Location = new System.Drawing.Point(317, 207);
             this.btn_cos.Name = "btn_cos";
             this.btn_cos.Size = new System.Drawing.Size(50, 38);
             this.btn_cos.TabIndex = 19;
@@ -255,7 +260,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(408, 163);
+            this.button3.Location = new System.Drawing.Point(429, 163);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(50, 38);
             this.button3.TabIndex = 20;
@@ -264,7 +269,7 @@
             // 
             // btn_tan
             // 
-            this.btn_tan.Location = new System.Drawing.Point(352, 251);
+            this.btn_tan.Location = new System.Drawing.Point(317, 251);
             this.btn_tan.Name = "btn_tan";
             this.btn_tan.Size = new System.Drawing.Size(50, 38);
             this.btn_tan.TabIndex = 21;
@@ -295,11 +300,64 @@
             this.radioButtonRadians.Text = "Radians";
             this.radioButtonRadians.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(429, 207);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 38);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(429, 251);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(50, 38);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "1";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btnPowerThree
+            // 
+            this.btnPowerThree.Location = new System.Drawing.Point(373, 207);
+            this.btnPowerThree.Name = "btnPowerThree";
+            this.btnPowerThree.Size = new System.Drawing.Size(50, 38);
+            this.btnPowerThree.TabIndex = 27;
+            this.btnPowerThree.Text = "x³";
+            this.btnPowerThree.UseVisualStyleBackColor = true;
+            this.btnPowerThree.Click += new System.EventHandler(this.btnPowerThree_Click);
+            // 
+            // btnPowerTwo
+            // 
+            this.btnPowerTwo.Location = new System.Drawing.Point(373, 163);
+            this.btnPowerTwo.Name = "btnPowerTwo";
+            this.btnPowerTwo.Size = new System.Drawing.Size(50, 38);
+            this.btnPowerTwo.TabIndex = 28;
+            this.btnPowerTwo.Text = "x²";
+            this.btnPowerTwo.UseVisualStyleBackColor = true;
+            this.btnPowerTwo.Click += new System.EventHandler(this.btnPowerTwo_Click);
+            // 
+            // btnPowerY
+            // 
+            this.btnPowerY.Location = new System.Drawing.Point(373, 250);
+            this.btnPowerY.Name = "btnPowerY";
+            this.btnPowerY.Size = new System.Drawing.Size(50, 38);
+            this.btnPowerY.TabIndex = 29;
+            this.btnPowerY.Text = "xⁿ";
+            this.btnPowerY.UseVisualStyleBackColor = true;
+            this.btnPowerY.Click += new System.EventHandler(this.btnPowerY_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnPowerY);
+            this.Controls.Add(this.btnPowerTwo);
+            this.Controls.Add(this.btnPowerThree);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.radioButtonRadians);
             this.Controls.Add(this.radioButtonDegrees);
             this.Controls.Add(this.btn_tan);
@@ -357,6 +415,11 @@
         private System.Windows.Forms.Button btn_tan;
         private System.Windows.Forms.RadioButton radioButtonDegrees;
         private System.Windows.Forms.RadioButton radioButtonRadians;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnPowerThree;
+        private System.Windows.Forms.Button btnPowerTwo;
+        private System.Windows.Forms.Button btnPowerY;
     }
 }
 

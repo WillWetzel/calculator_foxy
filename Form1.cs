@@ -254,6 +254,27 @@ namespace ScientificCalculator_Josh_Fox
             }
         }
 
+        private void btnPowerTwo_Click(object sender, EventArgs e)
+        {
+            num = decimal.Parse(textBox1.Text);
+            textBox1.Text = (num * num).ToString();
+        }
+
+        private void btnPowerThree_Click(object sender, EventArgs e)
+        {
+            num = decimal.Parse(textBox1.Text);
+            textBox1.Text = (num * num * num).ToString();
+        }
+
+        private void btnPowerY_Click(object sender, EventArgs e)
+        {
+            num = decimal.Parse(textBox1.Text);
+            operation = "^";
+            textBox1.Text = "0";
+
+            equation.Add(num.ToString());
+            equation.Add(operation);
+        }
     }
 
     public class EquationObject
@@ -309,6 +330,9 @@ namespace ScientificCalculator_Josh_Fox
                     return this.num1 * this.num2;
                 case "/":
                     return this.num1 / this.num2;
+                case "^":
+                    //Math lib only takes doubles and only RETURNS DOUBLES. Got to convert it back to a decimal for our return type.
+                    return Convert.ToDecimal(Math.Pow(Convert.ToDouble(this.num1), Convert.ToDouble(this.num2))); 
 
             }
             return 0;
@@ -326,6 +350,9 @@ namespace ScientificCalculator_Josh_Fox
                     return result * eo.num1;
                 case "/":
                     return result / eo.num1;
+                case "^":
+                    //Math lib only takes doubles and only RETURNS DOUBLES. Got to convert it back to a decimal for our return type.
+                    return Convert.ToDecimal(Math.Pow(Convert.ToDouble(result), Convert.ToDouble(num1)));
             }
             return 0;
         }
