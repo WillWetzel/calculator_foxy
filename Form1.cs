@@ -14,6 +14,9 @@ namespace ScientificCalculator_Josh_Fox
     {
         decimal num;
         string operation;
+
+        private bool radiansChecked; //Checks if radians is checked. True if yes. 
+
         List<String> equation = new List<String>();
 
         public Form1()
@@ -169,6 +172,88 @@ namespace ScientificCalculator_Josh_Fox
 
             textBox1.Text = "0";
         }
+
+        private void btn_sin_Click(object sender, EventArgs e)
+        {
+            //The Math library works this out with Radians and only takes doubles.
+            double result;
+            num = decimal.Parse(textBox1.Text);             
+
+            if (radioButtonDegrees.Checked)
+            {
+                //If degees checked...
+                //Perform sum and convert the radian to degrees and show answer.
+                result = Math.Sin((Math.PI / 180) * Convert.ToDouble(num));
+                textBox1.Text = result.ToString();
+            }
+            else if (radioButtonRadians.Checked)
+            {
+                //Already in radians...
+                result = Math.Sin(Convert.ToDouble(num));
+                textBox1.Text = result.ToString();
+            }
+
+        }
+
+        private void btn_cos_Click(object sender, EventArgs e)
+        {
+            //The Math library works this out with Radians and only takes doubles.
+            double result;
+            num = decimal.Parse(textBox1.Text);
+
+            if (radioButtonDegrees.Checked)
+            {
+                //If degees checked...
+                //Perform sum and convert the radian to degrees and show answer.
+                result = Math.Cos((Math.PI / 180) * Convert.ToDouble(num));
+                textBox1.Text = result.ToString();
+            }
+            else if (radioButtonRadians.Checked)
+            {
+                //Already in radians...
+                result = Math.Cos(Convert.ToDouble(num));
+                textBox1.Text = result.ToString();
+            }
+        }
+
+        private void btn_tan_Click(object sender, EventArgs e)
+        {
+            //The Math library works this out with Radians and only takes doubles.
+            double result;
+            num = decimal.Parse(textBox1.Text);
+
+            if (radioButtonDegrees.Checked)
+            {
+                //If degees checked...
+                //Perform sum and convert the radian to degrees and show answer.
+                result = Math.Tan((Math.PI / 180) * Convert.ToDouble(num));
+                textBox1.Text = result.ToString();
+            }
+            else if (radioButtonRadians.Checked)
+            {
+                //Already in radians...
+                result = Math.Tan(Convert.ToDouble(num));
+                textBox1.Text = result.ToString();
+            }
+        }
+
+        private double radians_to_degrees(double radian)
+        {
+            return radian * (180 / Math.PI);
+        }
+
+        private void radioButtonDegrees_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonRadians.Checked)
+            {
+                radiansChecked = true;
+            }
+            else if (radioButtonDegrees.Checked)
+            {
+                radiansChecked = false;
+            }
+        }
+
     }
 
     public class EquationObject

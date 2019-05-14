@@ -46,6 +46,12 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btn_equals = new System.Windows.Forms.Button();
             this.Clear = new System.Windows.Forms.Button();
+            this.btn_sin = new System.Windows.Forms.Button();
+            this.btn_cos = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.btn_tan = new System.Windows.Forms.Button();
+            this.radioButtonDegrees = new System.Windows.Forms.RadioButton();
+            this.radioButtonRadians = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // btn_1
@@ -227,11 +233,79 @@
             this.Clear.UseVisualStyleBackColor = true;
             this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
+            // btn_sin
+            // 
+            this.btn_sin.Location = new System.Drawing.Point(352, 163);
+            this.btn_sin.Name = "btn_sin";
+            this.btn_sin.Size = new System.Drawing.Size(50, 38);
+            this.btn_sin.TabIndex = 18;
+            this.btn_sin.Text = "sin";
+            this.btn_sin.UseVisualStyleBackColor = true;
+            this.btn_sin.Click += new System.EventHandler(this.btn_sin_Click);
+            // 
+            // btn_cos
+            // 
+            this.btn_cos.Location = new System.Drawing.Point(352, 207);
+            this.btn_cos.Name = "btn_cos";
+            this.btn_cos.Size = new System.Drawing.Size(50, 38);
+            this.btn_cos.TabIndex = 19;
+            this.btn_cos.Text = "cos";
+            this.btn_cos.UseVisualStyleBackColor = true;
+            this.btn_cos.Click += new System.EventHandler(this.btn_cos_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(408, 163);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(50, 38);
+            this.button3.TabIndex = 20;
+            this.button3.Text = "1";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // btn_tan
+            // 
+            this.btn_tan.Location = new System.Drawing.Point(352, 251);
+            this.btn_tan.Name = "btn_tan";
+            this.btn_tan.Size = new System.Drawing.Size(50, 38);
+            this.btn_tan.TabIndex = 21;
+            this.btn_tan.Text = "tan";
+            this.btn_tan.UseVisualStyleBackColor = true;
+            this.btn_tan.Click += new System.EventHandler(this.btn_tan_Click);
+            // 
+            // radioButtonDegrees
+            // 
+            this.radioButtonDegrees.AutoSize = true;
+            this.radioButtonDegrees.Checked = true;
+            this.radioButtonDegrees.Location = new System.Drawing.Point(64, 82);
+            this.radioButtonDegrees.Name = "radioButtonDegrees";
+            this.radioButtonDegrees.Size = new System.Drawing.Size(65, 17);
+            this.radioButtonDegrees.TabIndex = 23;
+            this.radioButtonDegrees.TabStop = true;
+            this.radioButtonDegrees.Text = "Degrees";
+            this.radioButtonDegrees.UseVisualStyleBackColor = true;
+            this.radioButtonDegrees.CheckedChanged += new System.EventHandler(this.radioButtonDegrees_CheckedChanged);
+            // 
+            // radioButtonRadians
+            // 
+            this.radioButtonRadians.AutoSize = true;
+            this.radioButtonRadians.Location = new System.Drawing.Point(156, 82);
+            this.radioButtonRadians.Name = "radioButtonRadians";
+            this.radioButtonRadians.Size = new System.Drawing.Size(64, 17);
+            this.radioButtonRadians.TabIndex = 24;
+            this.radioButtonRadians.Text = "Radians";
+            this.radioButtonRadians.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.radioButtonRadians);
+            this.Controls.Add(this.radioButtonDegrees);
+            this.Controls.Add(this.btn_tan);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btn_cos);
+            this.Controls.Add(this.btn_sin);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.btn_equals);
             this.Controls.Add(this.textBox1);
@@ -277,6 +351,12 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_equals;
         private System.Windows.Forms.Button Clear;
+        private System.Windows.Forms.Button btn_sin;
+        private System.Windows.Forms.Button btn_cos;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_tan;
+        private System.Windows.Forms.RadioButton radioButtonDegrees;
+        private System.Windows.Forms.RadioButton radioButtonRadians;
     }
 }
 
