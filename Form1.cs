@@ -82,6 +82,12 @@ namespace ScientificCalculator_Josh_Fox
             input("0");
         }
 
+
+        private void btnPie_Click(object sender, EventArgs e)
+        {
+            input("3.14159");
+        }
+
         private void btn_dot_Click(object sender, EventArgs e)
         {
             textBox1.Text += ".";
@@ -121,6 +127,17 @@ namespace ScientificCalculator_Josh_Fox
         {
             num = decimal.Parse(textBox1.Text);
             operation = "/";
+            textBox1.Text = "0";
+
+            equation.Add(num.ToString());
+            equation.Add(operation);
+        }
+
+
+        private void btnMod_Click(object sender, EventArgs e)
+        {
+            num = decimal.Parse(textBox1.Text);
+            operation = "%";
             textBox1.Text = "0";
 
             equation.Add(num.ToString());
@@ -275,86 +292,50 @@ namespace ScientificCalculator_Josh_Fox
             equation.Add(num.ToString());
             equation.Add(operation);
         }
-    }
 
-    public class EquationObject
-    {
-        decimal num1;
-        decimal num2;
-        string operation;
-
-        public EquationObject(decimal n1, string op, decimal n2)
+        private void btnFactorial_Click(object sender, EventArgs e)
         {
-            this.num1 = n1;
-            this.num2 = n2;
-            this.operation = op;
-        }
+            num = decimal.Parse(textBox1.Text);
 
-        public EquationObject(string op, decimal num)
-        {
-            this.num1 = num;
-            this.operation = op;
-        }
+            decimal result = 1;
+            //Factorial: 3! = 3 x 2 x 1 = 6 Or 5! = 5 x 4 x 3 x 2 x 1 = 120
+            //While loop. Minus one off our number each repition.
 
-        public decimal SolveLeftToRight(List<EquationObject> eo)
-        {
-            decimal result = 0;
-
-            for(int i = 0; i < eo.Count; i++)
+            //Problem with decimals... Can't factorial 4 digit numbers.
+            //Todo: Add error handling here.
+            while (num != 1)
             {
-                if (i == 0)
-                {
-                    result = eo.FirstOrDefault().performOperation();
-                }
-                else
-                {
-                    result = performOperation(result, eo[i]);
-                }
+                result = result * num;
+                num = num - 1;
             }
 
-            return result;
-
+            textBox1.Text = result.ToString();
         }
 
-
-
-        protected decimal performOperation()
+        private void btnSqrt_Click(object sender, EventArgs e)
         {
-            switch (operation)
-            {
-                case "+":
-                    return this.num1 + this.num2;
-                case "-":
-                    return this.num1 - this.num2;
-                case "*":
-                    return this.num1 * this.num2;
-                case "/":
-                    return this.num1 / this.num2;
-                case "^":
-                    //Math lib only takes doubles and only RETURNS DOUBLES. Got to convert it back to a decimal for our return type.
-                    return Convert.ToDecimal(Math.Pow(Convert.ToDouble(this.num1), Convert.ToDouble(this.num2))); 
+            num = decimal.Parse(textBox1.Text);
+            double result = Math.Sqrt((double)num);
 
-            }
-            return 0;
+            textBox1.Text = result.ToString();
         }
 
-        protected decimal performOperation(decimal result, EquationObject eo)
+        private void btnCubeRoot_Click(object sender, EventArgs e)
         {
-            switch (eo.operation)
-            {
-                case "+":
-                    return result + eo.num1;
-                case "-":
-                    return result - eo.num1;
-                case "*":
-                    return result * eo.num1;
-                case "/":
-                    return result / eo.num1;
-                case "^":
-                    //Math lib only takes doubles and only RETURNS DOUBLES. Got to convert it back to a decimal for our return type.
-                    return Convert.ToDecimal(Math.Pow(Convert.ToDouble(result), Convert.ToDouble(num1)));
-            }
-            return 0;
+            double result, num1;
+
+            num1 = double.Parse(textBox1.Text);
+            result = Math.Ceiling(Math.Pow(num1, (double)1 / 3));
+
+            textBox1.Text = result.ToString();
+        }
+
+        private void btnLog_Click(object sender, EventArgs e)
+        {
+            num = decimal.Parse(textBox1.Text);
+            double result = Math.Log10((double)num);
+
+            textBox1.Text = result.ToString();
         }
     }
 
