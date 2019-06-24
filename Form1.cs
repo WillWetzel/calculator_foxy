@@ -12,7 +12,7 @@ namespace ScientificCalculator_Josh_Fox
 {
     public partial class Form1 : Form
     {
-        decimal num;
+        double num, result, MemoryStore;
         string operation;
 
         private bool radiansChecked; //Checks if radians is checked. True if yes. 
@@ -95,7 +95,7 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             operation = "+";
             textBox1.Text = "0";
 
@@ -105,7 +105,7 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             operation = "-";
             textBox1.Text = "0";
 
@@ -115,7 +115,7 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btn_multiply_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             operation = "*";
             textBox1.Text = "0";
 
@@ -125,7 +125,7 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btn_div_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             operation = "/";
             textBox1.Text = "0";
 
@@ -136,7 +136,7 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btnMod_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             operation = "%";
             textBox1.Text = "0";
 
@@ -149,7 +149,6 @@ namespace ScientificCalculator_Josh_Fox
             equation.Add(textBox1.Text);
 
             List<EquationObject> subEquations = new List<EquationObject>();
-            decimal result;
 
             //First sort them into a list of equations.
             //Then apply bidmass to the sub equations.
@@ -158,14 +157,14 @@ namespace ScientificCalculator_Josh_Fox
             {
                 if (i == 0)
                 {
-                    EquationObject eo = new EquationObject(decimal.Parse(equation[i]), equation[i + 1], decimal.Parse(equation[i + 2]));
+                    EquationObject eo = new EquationObject(double.Parse(equation[i]), equation[i + 1], double.Parse(equation[i + 2]));
 
                     subEquations.Add(eo);
                     i = i + 2;
                 }
                 else
                 {
-                    EquationObject eo = new EquationObject(equation[i], decimal.Parse(equation[i + 1]));
+                    EquationObject eo = new EquationObject(equation[i], double.Parse(equation[i + 1]));
                     subEquations.Add(eo);
                     i++;
                 }
@@ -175,7 +174,7 @@ namespace ScientificCalculator_Josh_Fox
             }
 
             //Needs to solve for each one.
-            result = subEquations.FirstOrDefault().SolveLeftToRight(subEquations);
+            result = (double)subEquations.FirstOrDefault().SolveLeftToRight(subEquations);
             textBox1.Text = result.ToString();
 
             equation.Clear();
@@ -193,8 +192,7 @@ namespace ScientificCalculator_Josh_Fox
         private void btn_sin_Click(object sender, EventArgs e)
         {
             //The Math library works this out with Radians and only takes doubles.
-            double result;
-            num = decimal.Parse(textBox1.Text);             
+            num = double.Parse(textBox1.Text);             
 
             if (radioButtonDegrees.Checked)
             {
@@ -215,8 +213,7 @@ namespace ScientificCalculator_Josh_Fox
         private void btn_cos_Click(object sender, EventArgs e)
         {
             //The Math library works this out with Radians and only takes doubles.
-            double result;
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
 
             if (radioButtonDegrees.Checked)
             {
@@ -236,8 +233,7 @@ namespace ScientificCalculator_Josh_Fox
         private void btn_tan_Click(object sender, EventArgs e)
         {
             //The Math library works this out with Radians and only takes doubles.
-            double result;
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
 
             if (radioButtonDegrees.Checked)
             {
@@ -273,19 +269,19 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btnPowerTwo_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             textBox1.Text = (num * num).ToString();
         }
 
         private void btnPowerThree_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             textBox1.Text = (num * num * num).ToString();
         }
 
         private void btnPowerY_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             operation = "^";
             textBox1.Text = "0";
 
@@ -295,9 +291,9 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btnFactorial_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
+            result = 1;
 
-            decimal result = 1;
             //Factorial: 3! = 3 x 2 x 1 = 6 Or 5! = 5 x 4 x 3 x 2 x 1 = 120
             //While loop. Minus one off our number each repition.
 
@@ -314,7 +310,7 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btnSqrt_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
+            num = double.Parse(textBox1.Text);
             double result = Math.Sqrt((double)num);
 
             textBox1.Text = result.ToString();
@@ -322,7 +318,7 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btnCubeRoot_Click(object sender, EventArgs e)
         {
-            double result, num1;
+            double num1;
 
             num1 = double.Parse(textBox1.Text);
             result = Math.Ceiling(Math.Pow(num1, (double)1 / 3));
@@ -332,10 +328,52 @@ namespace ScientificCalculator_Josh_Fox
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-            num = decimal.Parse(textBox1.Text);
-            double result = Math.Log10((double)num);
+            num = double.Parse(textBox1.Text);
+            result = Math.Log10((double)num);
 
             textBox1.Text = result.ToString();
+        }
+
+        private void btnMemory_Click(object sender, EventArgs e)
+        {
+            Button ButtonThatWasPushed = (Button)sender;
+            string ButtonText = ButtonThatWasPushed.Text;
+
+            if (ButtonText == "MC")
+            {
+                //Memory Clear
+                MemoryStore = 0;
+                return;
+            }
+
+            if (ButtonText == "MR")
+            {
+                //Memory Recall
+                textBox1.Text = MemoryStore.ToString();
+                return;
+            }
+
+            if (ButtonText == "MS")
+            {
+                //Adds number in display to memory
+                MemoryStore = double.Parse(textBox1.Text);
+                return;
+            }
+
+            if (ButtonText == "M+")
+            {
+                //Memory add 
+                MemoryStore += result;
+                return;
+            }
+
+            if (ButtonText == "M-")
+            {
+                //Memory subtract
+                MemoryStore -= result;
+                textBox1.Text = MemoryStore.ToString();
+                return;
+            }
         }
     }
 

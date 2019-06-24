@@ -63,6 +63,12 @@
             this.btnLog = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.btnMadd = new System.Windows.Forms.Button();
+            this.btnMS = new System.Windows.Forms.Button();
+            this.btnMR = new System.Windows.Forms.Button();
+            this.btnMC = new System.Windows.Forms.Button();
+            this.btnMminus = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_1
@@ -220,7 +226,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 24);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(442, 20);
+            this.textBox1.Size = new System.Drawing.Size(275, 20);
             this.textBox1.TabIndex = 15;
             this.textBox1.Text = "0";
             // 
@@ -288,7 +294,7 @@
             // 
             this.radioButtonDegrees.AutoSize = true;
             this.radioButtonDegrees.Checked = true;
-            this.radioButtonDegrees.Location = new System.Drawing.Point(25, 61);
+            this.radioButtonDegrees.Location = new System.Drawing.Point(307, 27);
             this.radioButtonDegrees.Name = "radioButtonDegrees";
             this.radioButtonDegrees.Size = new System.Drawing.Size(65, 17);
             this.radioButtonDegrees.TabIndex = 23;
@@ -300,7 +306,7 @@
             // radioButtonRadians
             // 
             this.radioButtonRadians.AutoSize = true;
-            this.radioButtonRadians.Location = new System.Drawing.Point(111, 61);
+            this.radioButtonRadians.Location = new System.Drawing.Point(391, 27);
             this.radioButtonRadians.Name = "radioButtonRadians";
             this.radioButtonRadians.Size = new System.Drawing.Size(64, 17);
             this.radioButtonRadians.TabIndex = 24;
@@ -414,11 +420,76 @@
             this.button2.Text = "2";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(293, 50);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(50, 38);
+            this.button3.TabIndex = 36;
+            this.button3.Text = "2";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // btnMadd
+            // 
+            this.btnMadd.Location = new System.Drawing.Point(181, 50);
+            this.btnMadd.Name = "btnMadd";
+            this.btnMadd.Size = new System.Drawing.Size(50, 38);
+            this.btnMadd.TabIndex = 37;
+            this.btnMadd.Text = "M+";
+            this.btnMadd.UseVisualStyleBackColor = true;
+            this.btnMadd.Click += new System.EventHandler(this.btnMemory_Click);
+            // 
+            // btnMS
+            // 
+            this.btnMS.Location = new System.Drawing.Point(125, 50);
+            this.btnMS.Name = "btnMS";
+            this.btnMS.Size = new System.Drawing.Size(50, 38);
+            this.btnMS.TabIndex = 38;
+            this.btnMS.Text = "MS";
+            this.btnMS.UseVisualStyleBackColor = true;
+            this.btnMS.Click += new System.EventHandler(this.btnMemory_Click);
+            // 
+            // btnMR
+            // 
+            this.btnMR.Location = new System.Drawing.Point(69, 50);
+            this.btnMR.Name = "btnMR";
+            this.btnMR.Size = new System.Drawing.Size(50, 38);
+            this.btnMR.TabIndex = 39;
+            this.btnMR.Text = "MR";
+            this.btnMR.UseVisualStyleBackColor = true;
+            this.btnMR.Click += new System.EventHandler(this.btnMemory_Click);
+            // 
+            // btnMC
+            // 
+            this.btnMC.Location = new System.Drawing.Point(13, 50);
+            this.btnMC.Name = "btnMC";
+            this.btnMC.Size = new System.Drawing.Size(50, 38);
+            this.btnMC.TabIndex = 40;
+            this.btnMC.Text = "MC";
+            this.btnMC.UseVisualStyleBackColor = true;
+            this.btnMC.Click += new System.EventHandler(this.btnMemory_Click);
+            // 
+            // btnMminus
+            // 
+            this.btnMminus.Location = new System.Drawing.Point(237, 50);
+            this.btnMminus.Name = "btnMminus";
+            this.btnMminus.Size = new System.Drawing.Size(50, 38);
+            this.btnMminus.TabIndex = 41;
+            this.btnMminus.Text = "M-";
+            this.btnMminus.UseVisualStyleBackColor = true;
+            this.btnMminus.Click += new System.EventHandler(this.btnMemory_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 281);
+            this.ClientSize = new System.Drawing.Size(619, 281);
+            this.Controls.Add(this.btnMminus);
+            this.Controls.Add(this.btnMC);
+            this.Controls.Add(this.btnMR);
+            this.Controls.Add(this.btnMS);
+            this.Controls.Add(this.btnMadd);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnLog);
@@ -498,6 +569,12 @@
         private System.Windows.Forms.Button btnLog;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnMadd;
+        private System.Windows.Forms.Button btnMS;
+        private System.Windows.Forms.Button btnMR;
+        private System.Windows.Forms.Button btnMC;
+        private System.Windows.Forms.Button btnMminus;
     }
 }
 
