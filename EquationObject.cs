@@ -90,4 +90,3 @@ namespace ScientificCalculator_Josh_Fox
     }
 
 }
-}
