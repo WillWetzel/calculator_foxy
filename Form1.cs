@@ -12,11 +12,13 @@ namespace ScientificCalculator_Josh_Fox
 {
     public partial class Form1 : Form
     {
-        double num, result, MemoryStore;
+        double num, num2, result, MemoryStore;
 
         private bool radiansChecked; //Checks if radians is checked. True if yes. 
 
         List<String> equation = new List<String>();
+        string operation;
+        string[] operators = new string[6] { "(", "^", "*", "/", "+", "-" };
 
         public Form1()
         {
@@ -67,33 +69,20 @@ namespace ScientificCalculator_Josh_Fox
             for (int i = 0; i < equation.Count; i++)
             {
                 //Check if this element and next element are both doubles.
-                while (Double.TryParse(equation[i], out num1) && Double.TryParse(equation[i + 1], out num2))
+                if (i + 1 < equation.Count)
                 {
-                    equation[i] = equation[i] + equation[i + 1];
-                    equation.RemoveAt(i + 1);
+                    while (Double.TryParse(equation[i], out num1) && Double.TryParse(equation[i + 1], out num2))
+                    {
+                        equation[i] = equation[i] + equation[i + 1];
+                        equation.RemoveAt(i + 1);
+                    }
                 }
             }
 
             //First sort them into a list of equations.
             //Then apply bidmass to the sub equations.
             //Then solve in the new order.
-            for (int i = 0; i < equation.Count; i++)
-            {
-                if (equation.Count > 2)
-                {
-                    EquationObject eo = new EquationObject(double.Parse(equation[i]), equation[i + 1], double.Parse(equation[i + 2]));
-                    subEquations.Add(eo);
-                    i++;
-                    //At the start of hte loop, the second number in our first equation object will be the first number in our second.
-                }
-                else
-                {
-
-                }
-
-            }
-
-            result = subEquations.FirstOrDefault().SolveBidmass(subEquations);
+            result = SolveBidmass(equation);
 
             textBox1.Text = result.ToString();
 
@@ -138,6 +127,81 @@ namespace ScientificCalculator_Josh_Fox
 
             equation.Clear();
             */
+        }
+
+        public double SolveBidmass(List<string> eo)
+        {
+            double result = 0;
+            int i = 0;
+            int operatorIndex = -1;
+            List<string> NumOfOps = new List<string>();
+            bool operatorCheck = false;
+
+
+            //While thereare multiplications...
+            //Find index and perform equation at index.
+            //Then replace numbers in ajacent equations with answer.
+            //Continue.
+            //When done with mutliplications, go to division... etc
+            do
+            {
+                operatorCheck = false;
+
+                int index = eo.IndexOf(operators[i]);
+
+                if (index == -1)
+                {
+                    i++;
+                    continue;
+                }
+
+                num = Double.Parse(eo.ElementAt(index - 1));
+                operation = eo.ElementAt(index);
+                num2 = Double.Parse(eo.ElementAt(index + 1));
+
+                result = performOperation();
+
+                eo.RemoveRange(index - 1, 3);
+                eo.Insert(index - 1, result.ToString());
+
+                operatorCheck = eo.Contains(operators[i]);
+
+                if (operatorCheck == false)
+                {
+                    i++;
+                }
+                //What about an array of strings with each operator?
+                //Then we can have a if not end of array = true, if end of array = false?
+
+
+            } while (i < operators.Length);
+
+
+            //Solve for that operator with 
+            return Double.Parse(eo[0]);
+
+        }
+
+        protected double performOperation()
+        {
+            switch (operation)
+            {
+                case "+":
+                    return this.num + this.num2;
+                case "-":
+                    return this.num - this.num2;
+                case "*":
+                    return this.num * this.num2;
+                case "/":
+                    return this.num / this.num2;
+                case "%":
+                    return this.num % this.num2;
+                case "^":
+                    //Math lib only takes doubles and only RETURNS DOUBLES. Got to convert it back to a decimal for our return type.
+                    return Convert.ToDouble(Math.Pow(Convert.ToDouble(this.num), Convert.ToDouble(this.num2)));
+
+            }
+            return 0;
         }
 
         private void Clear_Click(object sender, EventArgs e)
