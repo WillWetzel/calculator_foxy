@@ -13,7 +13,6 @@ namespace ScientificCalculator_Josh_Fox
     public partial class Form1 : Form
     {
         double num, result, MemoryStore;
-        string operation;
 
         private bool radiansChecked; //Checks if radians is checked. True if yes. 
 
@@ -24,138 +23,86 @@ namespace ScientificCalculator_Josh_Fox
             InitializeComponent();
         }
 
-        private void input(string a)
+        private void input_Click(object sender, EventArgs e)
         {
+
+            Button ButtonThatWasPushed = (Button)sender;
+            string ButtonText = ButtonThatWasPushed.Text;
+
+            if (ButtonText.Contains('x'))
+            {
+                ButtonText = ButtonText.Replace('x', ' ');
+            }
+
             if (textBox1.Text == "0")
-                textBox1.Text = a;
+                textBox1.Text = ButtonText;
             else
-                textBox1.Text += a;
-        }
+                textBox1.Text += ButtonText;
 
-        private void btn_1_Click(object sender, EventArgs e)
-        {
-            input("1");
+            equation.Add(ButtonText);
         }
-
-        private void btn_2_Click(object sender, EventArgs e)
-        {
-            input("2");
-        }
-
-        private void btn_3_Click(object sender, EventArgs e)
-        {
-            input("3");
-        }
-
-        private void btn_4_Click(object sender, EventArgs e)
-        {
-            input("4");
-        }
-
-        private void btn_5_Click(object sender, EventArgs e)
-        {
-            input("5");
-        }
-
-        private void btn_6_Click(object sender, EventArgs e)
-        {
-            input("6");
-        }
-
-        private void btn_7_Click(object sender, EventArgs e)
-        {
-            input("7");
-        }
-
-        private void btn_8_Click(object sender, EventArgs e)
-        {
-            input("8");
-        }
-
-        private void btn_9_Click(object sender, EventArgs e)
-        {
-            input("9");
-        }
-
-        private void btn_0_Click(object sender, EventArgs e)
-        {
-            input("0");
-        }
-
 
         private void btnPie_Click(object sender, EventArgs e)
         {
-            input("3.14159");
+            double pi = 3.14159;
+
+            if (textBox1.Text == "0")
+                textBox1.Text = pi.ToString();
+            else
+                textBox1.Text += pi.ToString();
+
+            equation.Add(pi.ToString());
         }
 
-        private void btn_dot_Click(object sender, EventArgs e)
-        {
-            textBox1.Text += ".";
-        }
-
-        private void btn_plus_Click(object sender, EventArgs e)
-        {
-            num = double.Parse(textBox1.Text);
-            operation = "+";
-            textBox1.Text = "0";
-
-            equation.Add(num.ToString());
-            equation.Add(operation);
-        }
-
-        private void btn_minus_Click(object sender, EventArgs e)
-        {
-            num = double.Parse(textBox1.Text);
-            operation = "-";
-            textBox1.Text = "0";
-
-            equation.Add(num.ToString());
-            equation.Add(operation);
-        }
-
-        private void btn_multiply_Click(object sender, EventArgs e)
-        {
-            num = double.Parse(textBox1.Text);
-            operation = "*";
-            textBox1.Text = "0";
-
-            equation.Add(num.ToString());
-            equation.Add(operation);
-        }
-
-        private void btn_div_Click(object sender, EventArgs e)
-        {
-            num = double.Parse(textBox1.Text);
-            operation = "/";
-            textBox1.Text = "0";
-
-            equation.Add(num.ToString());
-            equation.Add(operation);
-        }
-
-
-        private void btnMod_Click(object sender, EventArgs e)
-        {
-            num = double.Parse(textBox1.Text);
-            operation = "%";
-            textBox1.Text = "0";
-
-            equation.Add(num.ToString());
-            equation.Add(operation);
-        }
 
         private void btn_equals_Click(object sender, EventArgs e)
         {
-            equation.Add(textBox1.Text);
-
             List<EquationObject> subEquations = new List<EquationObject>();
+            double num1, num2;
+
+            //As we are recording a string list, each digit will have its own element within our data structure.
+            //So 66 + 2 will be "6", "6", "+", "2"
+            //We need to comb through this. If there are two double parse-able strings, we need to combine into one element and remove the excess element while not changing the order.
+            //The reason this isn't with out for loop below is because of the run times of having a while loop within a for loop within a for loop (Big O notation. x^3 run time speeds)            
+            for (int i = 0; i < equation.Count; i++)
+            {
+                //Check if this element and next element are both doubles.
+                while (Double.TryParse(equation[i], out num1) && Double.TryParse(equation[i + 1], out num2))
+                {
+                    equation[i] = equation[i] + equation[i + 1];
+                    equation.RemoveAt(i + 1);
+                }
+            }
 
             //First sort them into a list of equations.
             //Then apply bidmass to the sub equations.
             //Then solve in the new order.
             for (int i = 0; i < equation.Count; i++)
             {
-                if (i == 0)
+                if (equation.Count > 2)
+                {
+                    EquationObject eo = new EquationObject(double.Parse(equation[i]), equation[i + 1], double.Parse(equation[i + 2]));
+                    subEquations.Add(eo);
+                    i++;
+                    //At the start of hte loop, the second number in our first equation object will be the first number in our second.
+                }
+                else
+                {
+
+                }
+
+            }
+
+            result = subEquations.FirstOrDefault().SolveBidmass(subEquations);
+
+            textBox1.Text = result.ToString();
+
+            equation.Clear();
+
+
+
+            /*
+                if (i == 0 && equation.Count > 2)
                 {
                     EquationObject eo = new EquationObject(double.Parse(equation[i]), equation[i + 1], double.Parse(equation[i + 2]));
 
@@ -164,21 +111,33 @@ namespace ScientificCalculator_Josh_Fox
                 }
                 else
                 {
-                    EquationObject eo = new EquationObject(equation[i], double.Parse(equation[i + 1]));
-                    subEquations.Add(eo);
-                    i++;
+                    //Checking the order. 
+                    if (Double.TryParse(equation[i], out num))
+                    {
+                        EquationObject eo = new EquationObject(equation[i + 1], double.Parse(equation[i]));
+                        subEquations.Add(eo);
+                        i++;
+                    }
+                    else
+                    {
+                        EquationObject eo = new EquationObject(equation[i], double.Parse(equation[i + 1]));
+                        subEquations.Add(eo);
+                        i++;
+                    }
                 }
+                
+            //Add 1 to i again, so we add again in the loop and start at n2 of the previous equation.
 
-                //Add 1 to i again, so we add again in the loop and start at n2 of the previous equation.
 
-            }
 
             //Needs to solve for each one.
-            result = (double)subEquations.FirstOrDefault().SolveLeftToRight(subEquations);
+            //result = (double)subEquations.FirstOrDefault().SolveLeftToRight(subEquations);
+
+
             textBox1.Text = result.ToString();
 
             equation.Clear();
-
+            */
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -267,28 +226,6 @@ namespace ScientificCalculator_Josh_Fox
             }
         }
 
-        private void btnPowerTwo_Click(object sender, EventArgs e)
-        {
-            num = double.Parse(textBox1.Text);
-            textBox1.Text = (num * num).ToString();
-        }
-
-        private void btnPowerThree_Click(object sender, EventArgs e)
-        {
-            num = double.Parse(textBox1.Text);
-            textBox1.Text = (num * num * num).ToString();
-        }
-
-        private void btnPowerY_Click(object sender, EventArgs e)
-        {
-            num = double.Parse(textBox1.Text);
-            operation = "^";
-            textBox1.Text = "0";
-
-            equation.Add(num.ToString());
-            equation.Add(operation);
-        }
-
         private void btnFactorial_Click(object sender, EventArgs e)
         {
             num = double.Parse(textBox1.Text);
@@ -324,6 +261,22 @@ namespace ScientificCalculator_Josh_Fox
             result = Math.Ceiling(Math.Pow(num1, (double)1 / 3));
 
             textBox1.Text = result.ToString();
+        }
+
+        private void btnPowerTwo_Click(object sender, EventArgs e)
+        {
+            Button ButtonThatWasPushed = (Button)sender;
+            string ButtonText = ButtonThatWasPushed.Text;
+
+            ButtonText = ButtonText.Replace('x', ' ');
+
+            if (textBox1.Text == "0")
+                textBox1.Text = ButtonText;
+            else
+                textBox1.Text += ButtonText;
+
+            equation.Add("^");
+            equation.Add("2");
         }
 
         private void btnLog_Click(object sender, EventArgs e)

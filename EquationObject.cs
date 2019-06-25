@@ -11,6 +11,7 @@ namespace ScientificCalculator_Josh_Fox
         double num1;
         double num2;
         string operation;
+        string[] operators = new string[6] { "(", "^", "x", "/", "+", "-" };
 
         public EquationObject(double n1, string op, double n2)
         {
@@ -19,6 +20,7 @@ namespace ScientificCalculator_Josh_Fox
             this.operation = op;
         }
 
+        /*
         public EquationObject(string op, double num)
         {
             this.num1 = num;
@@ -44,6 +46,93 @@ namespace ScientificCalculator_Josh_Fox
             return result;
 
         }
+        */
+
+        public double SolveBidmass(List<EquationObject> eo)
+        {
+            double result = 0;
+            int operatorIndex = -1;
+            List<string> NumOfOps = new List<string>();
+            bool operatorCheck = false;
+
+            //Scan through and get our operators.
+            foreach (var sum in eo)
+            {
+                NumOfOps.Add(sum.operation);
+            }
+
+            //While thereare multiplications...
+            //Find index and perform equation at index.
+            //Then replace numbers in ajacent equations with answer.
+            //Continue.
+            //When done with mutliplications, go to division... etc
+            do
+            {
+                int i = 0;
+
+                operatorIndex = NumOfOps.IndexOf(operators[i]);     //IndexOf returns -1 if element is not found
+                result = eo.ElementAt(operatorIndex).performOperation();
+
+                eo = refreshEquations(eo, operatorIndex, result);
+
+                i++;
+
+
+                //What about an array of strings with each operator?
+                //Then we can have a if not end of array = true, if end of array = false?
+
+
+            } while (operatorIndex != -1);
+
+
+            //Solve for that operator with 
+            return 0;
+
+        }
+
+        private List<EquationObject> refreshEquations(List<EquationObject> eo, int operatorIndex, double result)
+        {
+            if (operatorIndex > 0)
+            {
+                eo.ElementAt(operatorIndex - 1).num2 = result;
+            }
+            if (operatorIndex < eo.Count)
+            {
+                eo.ElementAt(operatorIndex + 1).num1 = result;
+            }
+
+            return eo;
+        }
+
+
+        /*
+                if (sum.operation == "(")
+                {
+                    //Add to new list.
+                }
+                else if (sum.operation == "^")
+                {
+
+                }
+                else if (sum.operation == "/")
+                {
+
+                }
+                else if (sum.operation == "x")
+                {
+
+                }
+                else if (sum.operation == "+")
+                {
+
+                }
+                else if (sum.operation == "-")
+                {
+
+                }
+                */
+
+
 
         protected double performOperation()
         {
