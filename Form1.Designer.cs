@@ -61,9 +61,6 @@
             this.btnMod = new System.Windows.Forms.Button();
             this.btnPie = new System.Windows.Forms.Button();
             this.btnLog = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.btnMadd = new System.Windows.Forms.Button();
             this.btnMS = new System.Windows.Forms.Button();
             this.btnMR = new System.Windows.Forms.Button();
@@ -369,8 +366,9 @@
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(50, 38);
             this.btnClearAll.TabIndex = 30;
-            this.btnClearAll.Text = "CE --";
+            this.btnClearAll.Text = "CE";
             this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // btnMod
             // 
@@ -401,33 +399,6 @@
             this.btnLog.Text = "log";
             this.btnLog.UseVisualStyleBackColor = true;
             this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(405, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 38);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "2";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(349, 50);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 38);
-            this.button2.TabIndex = 35;
-            this.button2.Text = "2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(293, 50);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(50, 38);
-            this.button3.TabIndex = 36;
-            this.button3.Text = "2";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // btnMadd
             // 
@@ -489,9 +460,6 @@
             this.Controls.Add(this.btnMR);
             this.Controls.Add(this.btnMS);
             this.Controls.Add(this.btnMadd);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnLog);
             this.Controls.Add(this.btnPie);
             this.Controls.Add(this.btnMod);
@@ -567,9 +535,6 @@
         private System.Windows.Forms.Button btnMod;
         private System.Windows.Forms.Button btnPie;
         private System.Windows.Forms.Button btnLog;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnMadd;
         private System.Windows.Forms.Button btnMS;
         private System.Windows.Forms.Button btnMR;

@@ -18,32 +18,71 @@ namespace ScientificCalculator_Josh_Fox
 
         List<String> equation = new List<String>();
         string operation;
-        string[] operators = new string[6] { "(", "^", "*", "/", "+", "-" };
+        string[] operators = new string[5] { "^", "*", "/", "+", "-" };
 
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Scans button text (sender) for input value and adds to string list and to screen.
+        /// Unless its a power button. This is hard coded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void input_Click(object sender, EventArgs e)
         {
 
             Button ButtonThatWasPushed = (Button)sender;
             string ButtonText = ButtonThatWasPushed.Text;
 
-            if (ButtonText.Contains('x'))
+            switch (ButtonThatWasPushed.Name)
             {
-                ButtonText = ButtonText.Replace('x', ' ');
+                case "btnPowerTwo":
+                    equation.Add("^");
+                    equation.Add("2");
+
+                    if (textBox1.Text == "0")
+                        textBox1.Text = "^2";
+                    else
+                        textBox1.Text += "^2";
+
+                    break;
+                case "btnPowerThree":
+                    equation.Add("^");
+                    equation.Add("3");
+
+                    if (textBox1.Text == "0")
+                        textBox1.Text = "^3";
+                    else
+                        textBox1.Text += "^3";
+                    break;
+                case "btnPowerY":
+                    equation.Add("^");
+
+                    if (textBox1.Text == "0")
+                        textBox1.Text = "^";
+                    else
+                        textBox1.Text += "^";
+                    break;
+                default:
+                    equation.Add(ButtonText);
+
+                    if (textBox1.Text == "0")
+                        textBox1.Text = ButtonText;
+                    else
+                        textBox1.Text += ButtonText;
+                    break;
             }
 
-            if (textBox1.Text == "0")
-                textBox1.Text = ButtonText;
-            else
-                textBox1.Text += ButtonText;
-
-            equation.Add(ButtonText);
         }
 
+        /// <summary>
+        /// For Pi button. Input of 3.14159
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPie_Click(object sender, EventArgs e)
         {
             double pi = 3.14159;
@@ -57,86 +96,71 @@ namespace ScientificCalculator_Josh_Fox
         }
 
 
+        /// <summary>
+        /// Sorts string list into whole numbers and pass onto Bidmass before showing result to screen and clearing equation stored.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_equals_Click(object sender, EventArgs e)
         {
-            List<EquationObject> subEquations = new List<EquationObject>();
             double num1, num2;
+            int i = 0;
 
             //As we are recording a string list, each digit will have its own element within our data structure.
             //So 66 + 2 will be "6", "6", "+", "2"
             //We need to comb through this. If there are two double parse-able strings, we need to combine into one element and remove the excess element while not changing the order.
             //The reason this isn't with out for loop below is because of the run times of having a while loop within a for loop within a for loop (Big O notation. x^3 run time speeds)            
-            for (int i = 0; i < equation.Count; i++)
+            //Check if this element and next element are both doubles.
+            do
             {
-                //Check if this element and next element are both doubles.
-                if (i + 1 < equation.Count)
+                while (Double.TryParse(equation[i], out num1) && Double.TryParse(equation[i + 1], out num2))
                 {
-                    while (Double.TryParse(equation[i], out num1) && Double.TryParse(equation[i + 1], out num2))
+                    equation[i] = equation[i] + equation[i + 1];
+                    equation.RemoveAt(i + 1);
+                    if ((i + 1) == equation.Count)
                     {
-                        equation[i] = equation[i] + equation[i + 1];
-                        equation.RemoveAt(i + 1);
+                        break;
                     }
                 }
-            }
+
+                i++;
+                if ((i + 1) == equation.Count)
+                {
+                    break;
+                }
+
+            } while (i != equation.Count);
+
 
             //First sort them into a list of equations.
             //Then apply bidmass to the sub equations.
             //Then solve in the new order.
-            result = SolveBidmass(equation);
-
+            result = SolveBidmas(equation);
             textBox1.Text = result.ToString();
-
+            num = 0;
+            num2 = 0;
+            operation = "";
+            result = 0;
             equation.Clear();
-
-
-
-            /*
-                if (i == 0 && equation.Count > 2)
-                {
-                    EquationObject eo = new EquationObject(double.Parse(equation[i]), equation[i + 1], double.Parse(equation[i + 2]));
-
-                    subEquations.Add(eo);
-                    i = i + 2;
-                }
-                else
-                {
-                    //Checking the order. 
-                    if (Double.TryParse(equation[i], out num))
-                    {
-                        EquationObject eo = new EquationObject(equation[i + 1], double.Parse(equation[i]));
-                        subEquations.Add(eo);
-                        i++;
-                    }
-                    else
-                    {
-                        EquationObject eo = new EquationObject(equation[i], double.Parse(equation[i + 1]));
-                        subEquations.Add(eo);
-                        i++;
-                    }
-                }
-                
-            //Add 1 to i again, so we add again in the loop and start at n2 of the previous equation.
-
-
-
-            //Needs to solve for each one.
-            //result = (double)subEquations.FirstOrDefault().SolveLeftToRight(subEquations);
-
-
-            textBox1.Text = result.ToString();
-
-            equation.Clear();
-            */
         }
 
-        public double SolveBidmass(List<string> eo)
+        /// <summary>
+        /// Solve equation following BIDMAS.
+        /// B = Brackets (not added)
+        /// I = Indices (Powers)
+        /// D = Division
+        /// M = Multiplication
+        /// A = Addition
+        /// S = Subtraction
+        /// </summary>
+        /// <param name="eo">string List of eqation elements</param>
+        /// <returns></returns>
+        public double SolveBidmas(List<string> eo)
         {
             double result = 0;
             int i = 0;
-            int operatorIndex = -1;
             List<string> NumOfOps = new List<string>();
             bool operatorCheck = false;
-
 
             //While thereare multiplications...
             //Find index and perform equation at index.
@@ -170,18 +194,18 @@ namespace ScientificCalculator_Josh_Fox
                 {
                     i++;
                 }
-                //What about an array of strings with each operator?
-                //Then we can have a if not end of array = true, if end of array = false?
 
 
             } while (i < operators.Length);
 
-
-            //Solve for that operator with 
+            //Return result as final cell in equation string list
             return Double.Parse(eo[0]);
-
         }
 
+        /// <summary>
+        /// Performs operation of sum
+        /// </summary>
+        /// <returns></returns>
         protected double performOperation()
         {
             switch (operation)
@@ -204,14 +228,44 @@ namespace ScientificCalculator_Josh_Fox
             return 0;
         }
 
+        /// <summary>
+        /// Clears screen only.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Clear_Click(object sender, EventArgs e)
         {
             num = 0;
+            num2 = 0;
+            operation = "";
+            result = 0;
             equation.Clear();
 
             textBox1.Text = "0";
         }
 
+        /// <summary>
+        /// Clears all values in calculator, including memory.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            num = 0;
+            num2 = 0;
+            operation = "";
+            result = 0;
+            equation.Clear();
+            MemoryStore = 0;
+
+            textBox1.Text = "0";
+        }
+
+        /// <summary>
+        /// Checks for radians or degrees check boxes and performs sin() from Math library.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_sin_Click(object sender, EventArgs e)
         {
             //The Math library works this out with Radians and only takes doubles.
@@ -233,6 +287,11 @@ namespace ScientificCalculator_Josh_Fox
 
         }
 
+        /// <summary>
+        /// Checks for radians or degrees check boxes and performs cos() from Math library. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_cos_Click(object sender, EventArgs e)
         {
             //The Math library works this out with Radians and only takes doubles.
@@ -253,6 +312,11 @@ namespace ScientificCalculator_Josh_Fox
             }
         }
 
+        /// <summary>
+        /// Checks for radians or degrees check boxes and performs tan() from Math library.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_tan_Click(object sender, EventArgs e)
         {
             //The Math library works this out with Radians and only takes doubles.
@@ -273,6 +337,11 @@ namespace ScientificCalculator_Josh_Fox
             }
         }
 
+        /// <summary>
+        /// Sum for radians to degrees
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
         private double radians_to_degrees(double radian)
         {
             return radian * (180 / Math.PI);
@@ -299,11 +368,19 @@ namespace ScientificCalculator_Josh_Fox
             //While loop. Minus one off our number each repition.
 
             //Problem with decimals... Can't factorial 4 digit numbers.
-            //Todo: Add error handling here.
-            while (num != 1)
+            //TODO: Add error handling here.
+            try
             {
-                result = result * num;
-                num = num - 1;
+                while (num != 1)
+                {
+                    result = result * num;
+                    num = num - 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                textBox1.Text = "Result too large";
             }
 
             textBox1.Text = result.ToString();
@@ -351,6 +428,16 @@ namespace ScientificCalculator_Josh_Fox
             textBox1.Text = result.ToString();
         }
 
+        /// <summary>
+        /// Method for handling memory functions. Scans input from button text and performs appriopriate action with MemoryStore string variable.
+        /// MC = Memory Clear
+        /// MR = Memory Recall
+        /// MS = Adds number in display to memory
+        /// M+ = Memory add
+        /// M- = Memory subtract
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMemory_Click(object sender, EventArgs e)
         {
             Button ButtonThatWasPushed = (Button)sender;
