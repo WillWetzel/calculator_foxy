@@ -18,7 +18,7 @@ namespace ScientificCalculator_Josh_Fox
 
         List<String> equation = new List<String>();
         string operation;
-        string[] operators = new string[5] { "^", "*", "/", "+", "-" };
+        private string[] operators = new string[5] { "^", "*", "/", "+", "-" };
 
         public Form1()
         {
